@@ -5,8 +5,8 @@ const { headerFontFamily, bodyFontFamily } = typography
 export const base = {
   gutter: 15,
   colors: {
-    primary: '#2E189B',
-    secondary: '#FED141',
+    primary: '#364959',
+    secondary: '#ca4500',
     gray: {
       50: '#FAFAFA',
       100: '#F5F5F5',
@@ -20,7 +20,7 @@ export const base = {
       900: '#212121',
     },
     white: '#ffffff',
-    black: '#333333',
+    black: '#000000',
   },
   fonts: {
     header: headerFontFamily.join(','),
