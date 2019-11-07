@@ -1,6 +1,6 @@
 export default {
-  headerFontFamily: ['proxima-nova', 'serif'],
-  bodyFontFamily: ['Catamaran', 'sans-serif'],
+  headerFontFamily: ['flam-med', 'serif'],
+  bodyFontFamily: ['Open Sans', 'sans-serif'],
   bodyWeight: 500,
   overrideThemeStyles: function overrideThemeStyles(vr, options, styles) {
     return {

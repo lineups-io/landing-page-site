@@ -1,2 +1,9 @@
-@import url('https://use.typekit.net/wlq2gfp.css');
-@import url('https://fonts.googleapis.com/css?family=Catamaran&display=swap');
+@font-face {
+    font-family: "flam-med";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('./fonts/flam-med.woff') format('woff');
+}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700&display=swap');
