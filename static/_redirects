@@ -1,4 +1,4 @@
 # Redirect default Netlify subdomain to primary domain
-https://resprop.netlify.com/* https://live.respropmanagement.com/:splat 301!
+https://thefingercompanies.netlify.com/* https://live.fingercompanies.com/:splat 301!
 
 / /locations
