@@ -1,5 +1,5 @@
 export default {
-  headerFontFamily: ['flam-med', 'serif'],
+  headerFontFamily: ['flam-med', 'sans-serif'],
   bodyFontFamily: ['Open Sans', 'sans-serif'],
   bodyWeight: 500,
   overrideThemeStyles: function overrideThemeStyles(vr, options, styles) {
