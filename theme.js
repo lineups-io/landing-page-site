@@ -92,7 +92,7 @@ var getTheme = function getTheme(theme, override) {
     },
     link: "\n      display: block;\n      color: " + theme.colors.black + ";\n\n      border: 0;\n      background-color: transparent;\n      padding: 0;\n\n      &[href] {\n        cursor: pointer;\n        text-decoration: none;\n      }\n\n      &[href]:hover {\n        text-decoration: underline;\n        color: " + theme.colors.black + ";\n      }\n    ",
     button: {
-      primary: "\n        background-color: " + theme.colors.primary + ";\n        border-color: " + theme.colors.primary + ";\n        color: " + theme.colors.black + ";\n\n        &[href]:hover {\n          color: " + theme.colors.black + ";\n        }\n      ",
+      primary: "\n        background-color: " + theme.colors.primary + ";\n        border-color: " + theme.colors.primary + ";\n        color: " + theme.colors.white + ";\n\n        &[href]:hover {\n          color: " + theme.colors.white + ";\n        }\n      ",
       danger: "\n        background-color: red;\n        border-color: red;\n        color: " + theme.colors.white + ";\n\n        &[href]:hover {\n          color: " + theme.colors.white + ";\n        }\n      ",
       outline: "\n        background-color: " + theme.colors.white + ";\n      ",
       default: "\n        border-width: 1px;\n        border-style: solid;\n        border-color: " + theme.colors.gray['200'] + ";\n        background-color: " + theme.colors.gray['200'] + ";\n        color: " + theme.colors.black + ";\n\n        &::after {\n          border-color: " + theme.colors.black + ";\n        }\n      ",
@@ -111,10 +111,10 @@ var getTheme = function getTheme(theme, override) {
       link: "\n        font-size: 1.1em;\n        color: " + theme.colors.black + ";\n\n        &[href]:hover {\n          color: " + theme.colors.black + ";\n          text-decoration: underline;\n        }\n      "
     },
     footer: {
-      container: "\n        background-color: " + theme.colors.primary + ";\n        color: " + theme.colors.black + ";\n        border-width: 1px 0 0 0;\n        border-style: solid;\n        border-color: " + theme.colors.primary + ";\n      ",
+      container: "\n        background-color: " + theme.colors.primary + ";\n        color: " + theme.colors.white + ";\n        border-width: 1px 0 0 0;\n        border-style: solid;\n        border-color: " + theme.colors.primary + ";\n      ",
       header: "\n      ",
       copyright: "\n      ",
-      link: "\n        color: " + theme.colors.black + ";\n\n        svg * {\n          fill: " + theme.colors.black + ";\n        }\n\n        svg:hover * {\n          fill: " + theme.colors.black + ";\n        }\n\n        & {\n          cursor: pointer;\n        }\n\n        &[href]:hover {\n          text-decoration: underline;\n          color: " + theme.colors.black + ";\n        }\n      "
+      link: "\n        color: " + theme.colors.white + ";\n\n        svg * {\n          fill: " + theme.colors.white + ";\n        }\n\n        svg:hover * {\n          fill: " + theme.colors.white + ";\n        }\n\n        & {\n          cursor: pointer;\n        }\n\n        &[href]:hover {\n          text-decoration: underline;\n          color: " + theme.colors.white + ";\n        }\n      "
     },
     label: "\n      color: " + theme.colors.black + ";\n      font-size: .9em;\n    ",
     slider: {
