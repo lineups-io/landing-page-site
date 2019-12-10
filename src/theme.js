@@ -49,9 +49,7 @@ export const getTheme = (theme = base, override = {}) => {
         font-weight: normal;
         background-color: ${ theme.colors.white };
         color: ${ theme.colors.black };
-        border-width: 1px;
         border-style: solid;
-        border-color: ${ theme.colors.gray['200'] };
         text-decoration: none;
 
         &:hover, &[href]:hover {
