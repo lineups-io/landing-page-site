@@ -1,6 +1,6 @@
 export default {
-  headerFontFamily: ['Avenir', 'sans-serif'],
-  bodyFontFamily: ['Avenir', 'sans-serif'],
+  headerFontFamily: ['Lora', 'serif'],
+  bodyFontFamily: ['Lato', 'sans-serif'],
   bodyWeight: 500,
   overrideThemeStyles: function overrideThemeStyles(vr, options, styles) {
     return {
