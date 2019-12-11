@@ -66,7 +66,7 @@ export const getTheme = (theme = base, override = {}) => {
           height: 3,
           width: 16,
           offset: 7,
-          color: theme.colors.primary,
+          color: theme.colors.black,
         },
         link: `
           padding: ${ theme.gutter * 2 / 3 }px 0;

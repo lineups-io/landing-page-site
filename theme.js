@@ -58,7 +58,7 @@ var getTheme = function getTheme(theme, override) {
           height: 3,
           width: 16,
           offset: 7,
-          color: theme.colors.primary
+          color: theme.colors.black
         },
         link: "\n          padding: " + theme.gutter * 2 / 3 + "px 0;\n          border-width: 0 0 3px 0;\n          border-color: " + theme.colors.primary + ";\n          background-color: #27283b;\n          color: " + theme.colors.white + ";\n          font-size: 2.2em;\n          font-weight: 600;\n          text-transform: uppercase;\n        "
       }
