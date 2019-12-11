@@ -349,11 +349,11 @@ export const getTheme = (theme = base, override = {}) => {
     },
     footer: {
       container: `
-        background-color: ${ theme.colors.primary };
+        background-color: #28292d;
         color: ${ theme.colors.white };
         border-width: 1px 0 0 0;
         border-style: solid;
-        border-color: ${ theme.colors.primary };
+        border-color: #28292d;
       `,
       header: `
       `,

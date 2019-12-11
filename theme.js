@@ -111,7 +111,7 @@ var getTheme = function getTheme(theme, override) {
       link: "\n        font-size: 1.1em;\n        color: " + theme.colors.black + ";\n\n        &[href]:hover {\n          color: " + theme.colors.black + ";\n          text-decoration: underline;\n        }\n      "
     },
     footer: {
-      container: "\n        background-color: " + theme.colors.primary + ";\n        color: " + theme.colors.white + ";\n        border-width: 1px 0 0 0;\n        border-style: solid;\n        border-color: " + theme.colors.primary + ";\n      ",
+      container: "\n        background-color: #28292d;\n        color: " + theme.colors.white + ";\n        border-width: 1px 0 0 0;\n        border-style: solid;\n        border-color: #28292d;\n      ",
       header: "\n      ",
       copyright: "\n      ",
       link: "\n        color: " + theme.colors.white + ";\n\n        svg * {\n          fill: " + theme.colors.white + ";\n        }\n\n        svg:hover * {\n          fill: " + theme.colors.white + ";\n        }\n\n        & {\n          cursor: pointer;\n        }\n\n        &[href]:hover {\n          text-decoration: underline;\n          color: " + theme.colors.white + ";\n        }\n      "
