@@ -1,4 +1,4 @@
-#gatsby-focus-wrapper {
+#gatsby-focus-wrapper, #widget-focus-wrapper {
     width: 100%;
     height: 100%;
 }

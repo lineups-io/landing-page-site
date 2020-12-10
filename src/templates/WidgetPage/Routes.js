@@ -1,20 +1,18 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Router } from '@reach/Router'
 
-import VideoPlayer from 'gatsby-theme-atomic-design/src/templates/VideoPlayer'
-import MultipleChoiceQuestion from 'gatsby-theme-atomic-design/src/templates/MultipleChoiceQuestion'
-import GuestCard from 'gatsby-theme-atomic-design/src/templates/GuestCard'
-import Spinner from 'gatsby-theme-atomic-design/src/templates/Spinner'
-import ScheduleTour from 'gatsby-theme-atomic-design/src/templates/ScheduleTour'
-import ContactUs from 'gatsby-theme-atomic-design/src/templates/ContactUs'
-import Confirmation from 'gatsby-theme-atomic-design/src/templates/Confirmation'
-import Story from 'gatsby-theme-atomic-design/src/templates/VideoWidget'
-import InfiniteCalendar from 'gatsby-theme-atomic-design/src/templates/InfiniteCalendar'
+import Intro from './Routes/Intro'
+import MultipleChoiceQuestion from './Routes/MultipleChoiceQuestion'
+import GuestCard from './Routes/GuestCard'
+import Loading from './Routes/Loading'
+import ScheduleTour from './Routes/ScheduleTour'
+import ContactUs from './Routes/ContactUs'
+import Confirmation from './Routes/Confirmation'
+import Story from './Routes/Story'
+import MoveInDate from './Routes/MoveInDate'
 
 import useLocalStorage from './useLocalStorage.js'
-import useNavigate from './useNavigate.js'
-import NavLeft from './NavLeft'
-import NavRight from './NavRight'
+import Route from './Route'
 
 import loading from './loading.json'
 import confirmation from './confirmation.json'
@@ -22,6 +20,7 @@ import confirmation from './confirmation.json'
 const formatPhone = str => `tel:+1${ str.replace(/\D/g, '') }`
 
 const Routes = ({
+  basepath,
   info,
   intro,
   bedrooms,
@@ -31,146 +30,100 @@ const Routes = ({
   neighborhoodFeatures,
   contactUs,
 }) => {
-  const [store, setStore] = useLocalStorage('store', { user: {} })
-  const updateStore = (location, data = {}) => {
-    const key = location.pathname.replace(/^\//, '') || 'index'
-    setStore({
-      ...store,
-      user: {
-        firstName: data.firstName || store.user.firstName,
-        lastName: data.lastName || store.user.lastName,
-        email: data.email || store.user.email,
-        phone: data.phone || store.user.phone,
-      },
-      [key]: data,
-    })
-  }
+  const [store] = useLocalStorage('store', { user: {} })
 
-  const navigate = useNavigate(updateStore)
-
-  const transform = (path, { options, ...obj }, next) => obj.status !== 'hidden' ? ({
-    path,
-    component: MultipleChoiceQuestion,
-    ...obj,
-    NavLeft: () => <NavLeft onClick={() => navigate(-1)} />,
-    NavRight: () => obj.status === 'optional' && next ? <NavRight onClick={() => navigate(next)} /> : null,
-    options: options.filter(option => option.active),
-    onSubmit: data => navigate(next, data),
-  }) : undefined
-
-  // TODO : write function
-  const action = str => () => console.debug(str)
   const onCall = () => window.open(formatPhone(info.apartment.prospectPhoneNumber))
 
-  const routes = [
-    {
-      path: '/',
-      component: VideoPlayer,
-      ...intro,
-      sources: [
-        {
-          src: intro.video,
-          type: `video/${ intro.video.split('.').splice(-1) }`,
-        }
-      ],
-      tracks: [
-        {
-          kind: 'captions',
-          srcLang: 'en',
-          label: 'English',
-          src: intro.closedCaptions,
-         }
-      ],
-      onBeginTour: () => navigate('/bedrooms'),
-    },
-    transform('/bedrooms', bedrooms, '/move-in'),
-    {
-      path: '/move-in',
-      component: InfiniteCalendar,
-      NavLeft: () => <NavLeft onClick={() => navigate(-1)} />,
-      onSubmit: date => navigate('/floorplan-amenities', date),
-    },
-    transform('/floorplan-amenities', floorplanAmenities, '/community-amenities'),
-    transform('/community-amenities', communityAmenities, '/neighborhood-features'),
-    transform('/neighborhood-features', neighborhoodFeatures, '/guest-card'),
-    {
-      path: '/guest-card',
-      component: GuestCard,
-      ...store.user,
-      title: 'To help us personalize the experience, tell us a little about you',
-      onSubmit: data => navigate('/loading', data),
-      privacyPolicyUrl: info.privacyPolicyUrl,
-      NavLeft: () => <NavLeft onClick={() => navigate(-1)} />,
-    },
-    {
-      path: '/loading',
-      component: Spinner,
-      lottie: loading,
-      title: 'Give us a moment while we customize a tour for you!',
-      onComplete: () => navigate('/story'),
-    },
-    {
-      path: '/story',
-      component: Story,
-
-      theme: info.account.theme,
-      data: story.data,
-
-      stories: [],
-      onCheckAvailibility: action('onCheckAvailibility'),
-      onCall,
-      onContactUs: () => navigate('/contact-us'),
-      onScheduleTour: () => navigate('/schedule-tour'),
-      onStoryStart: action('onStoryStart'),
-      onStoryEnd: action('onStoryEnd'),
-      onAllStoriesEnd: action('onAllStoriesEnd'),
-    },
-    {
-      path: '/schedule-tour',
-      component: ScheduleTour,
-      ...store.user,
-      onSubmit: data => navigate('/schedule-tour-confirmation', data),
-      NavLeft: () => <NavLeft onClick={() => navigate(-1)} />,
-    },
-    {
-      path: '/schedule-tour-confirmation',
-      component: Confirmation,
-      lottie: confirmation,
-      title: 'Thank you for scheduling a tour!',
-      subtitle: 'Looking forward to meeting you.',
-      onStartOver: () => navigate('/'),
-      onCall,
-      onContactUs: () => navigate('/contact-us'),
-      onScheduleTour: () => navigate('/schedule-tour'),
-    },
-    {
-      path: '/contact-us',
-      component: ContactUs,
-      // FIXME: contactUs.emailTo should be required
-      to: contactUs.emailTo || 'lucas@lineups.io',
-      from: store.user ? store.user.email : '',
-      question: 'Have a question we have an answer?',
-      privacyPolicyUrl: info.privacyPolicyUrl,
-      onSubmit: data => navigate('/contact-us-confirmation', data),
-      NavLeft: () => <NavLeft onClick={() => navigate(-1)} />,
-    },
-    {
-      path: '/contact-us-confirmation',
-      component: Confirmation,
-      lottie: confirmation,
-      title: 'Thank you !!! Someone will be in touch soon.',
-      onStartOver: () => navigate('/'),
-      onCall,
-      onContactUs: () => navigate('/contact-us'),
-      onScheduleTour: () => navigate('/schedule-tour'),
-    },
-  ]
-
-  return routes.map(({ component: Component, path, ...props }, i) =>
-    <Route key={i} exact path={path}>
-      <Component {...props} />
-    </Route>
-  )
+  return <Router id='widget-focus-wrapper' basepath={basepath}>
+    <Route
+      path='/'
+      component={Intro}
+      {...intro}
+      next='/bedrooms'
+    />
+    <Route
+      path='/bedrooms'
+      component={MultipleChoiceQuestion}
+      {...bedrooms}
+      next='/move-in'
+    />
+    <Route
+      path='/move-in'
+      component={MoveInDate}
+      next='/floorplan-amenities'
+    />
+    <Route
+      path='/floorplan-amenities'
+      component={MultipleChoiceQuestion}
+      {...floorplanAmenities}
+      next='/community-amenities'
+    />
+    <Route
+      path='/community-amenities'
+      component={MultipleChoiceQuestion}
+      {...communityAmenities}
+      next='/neighborhood-features'
+    />
+    <Route
+      path='/neighborhood-features'
+      component={MultipleChoiceQuestion}
+      {...neighborhoodFeatures}
+      next='/guest-card'
+    />
+    <Route
+      path='/guest-card'
+      component={GuestCard}
+      {...store.user}
+      title='To help us personalize the experience, tell us a little about you'
+      next='/loading'
+      privacyPolicyUrl={info.privacyPolicyUrl}
+    />
+    <Route
+      path='/loading'
+      component={Loading}
+      lottie={loading}
+      title='Give us a moment while we customize a tour for you!'
+      next='/story'
+    />
+    <Route
+      path='/story'
+      component={Story}
+      theme={info.account.theme}
+      data={story.data}
+      onCall={onCall}
+    />
+    <Route
+      path='/schedule-tour'
+      component={ScheduleTour}
+      {...store.user}
+      next='/schedule-tour-confirmation'
+    />
+    <Route
+      path='/schedule-tour-confirmation'
+      component={Confirmation}
+      lottie={confirmation}
+      title='Thank you for scheduling a tour!'
+      subtitle='Looking forward to meeting you.'
+      onCall={onCall}
+    />
+    {/* FIXME: contactUs.emailTo should be required */}
+    <Route
+      path='/contact-us'
+      component={ContactUs}
+      to={contactUs.emailTo || 'lucas@lineups.io'}
+      from={store.user ? store.user.email : ''}
+      question='Have a question we have an answer?'
+      privacyPolicyUrl={info.privacyPolicyUrl}
+      next='/contact-us-confirmation'
+    />
+    <Route
+      path='/contact-us-confirmation'
+      component={Confirmation}
+      lottie={confirmation}
+      title='Thank you !!! Someone will be in touch soon.'
+      onCall={onCall}
+    />
+  </Router>
 }
 
 export default Routes
