@@ -10,7 +10,6 @@ dayjs.extend(timezone)
 
 const {
   ENTRATA_API_URI: uri,
-  ENTRATA_API_USER: user,
   ENTRATA_API_KEY: pass,
   SLACK_ALERTS_WEBHOOK
 } = process.env
@@ -92,7 +91,7 @@ const handler = async function(event, context) {
 
   const body = {
     auth: {
-      type: 'basic'
+      type: 'apikey'
     },
     requestId: '_' + Math.random().toString(36).substr(2, 9),
     method: {
@@ -108,10 +107,9 @@ const handler = async function(event, context) {
     }
   }
 
-  return request.post(`${uri}/api/v1/leads`, {
-    auth: {
-      user: user,
-      pass: pass,
+  return request.post(`${uri}/leads`, {
+    headers: {
+      'X-Api-Key': pass
     },
     json: true,
     body: body

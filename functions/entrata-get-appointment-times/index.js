@@ -8,14 +8,13 @@ dayjs.extend(customParseFormat)
 
 const {
   ENTRATA_API_URI: uri,
-  ENTRATA_API_USER: user,
   ENTRATA_API_KEY: pass
 } = process.env
 
 const getCalendarAvailability = (propertyId, date) => {
   const body = {
     auth: {
-      type: 'basic'
+      type: 'apikey'
     },
     requestId: '_' + Math.random().toString(36).substr(2, 9),
     method: {
@@ -33,10 +32,9 @@ const getCalendarAvailability = (propertyId, date) => {
     }
   }
 
-  return request.post(`${uri}/api/v1/properties`, {
-    auth: {
-      user: user,
-      pass: pass,
+  return request.post(`${uri}/properties`, {
+    headers: {
+      'X-Api-Key': pass
     },
     json: true,
     body: body
