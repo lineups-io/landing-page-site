@@ -93,7 +93,7 @@ const LandingPage = ({ data, location }) => {
   }, { dispatchOnMount: true })
 
   return <>
-    <Layout trackingData={trackingData} {...data.lineups.site} {...data.lineups.page} bestPrice={bestPrice} />
+    <Layout trackingData={trackingData} {...data.lineups.site} {...data.lineups.page} bestPrice={bestPrice} version={1} />
   </>
 }
 
