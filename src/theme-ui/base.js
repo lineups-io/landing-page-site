@@ -19,7 +19,7 @@ const base = {
   colors: {
     text: '#000',
     background: '#fff',
-    primary: '#F4A261',
+    primary: '#AF2531',
     secondary: '#337BB7',
     muted: '#f6f6f6',
   },
