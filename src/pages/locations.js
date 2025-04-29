@@ -30,7 +30,7 @@ export const query = graphql`
           ...FooterFields
           displayMarketsByState
       }
-      markets: findMarkets(matchEquals: true filter: { account: $account } sort: [["market", "1"]]) {
+      markets: findMarkets(filter: { account: $account } sort: [["market", "1"]]) {
         count
         items {
           ...LocationFields

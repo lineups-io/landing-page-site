@@ -111,7 +111,6 @@ export const query = graphql`
         ...MapFields
         ...BreadcrumbFields
         apartments(
-          matchEquals: true
           filter: { status: published }
           sort: [["spotlight", "-1"], ["name", $sort]]
         ) {

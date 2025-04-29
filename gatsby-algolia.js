@@ -248,7 +248,7 @@ const queries = [
 
       query getAlgoliaIndexData {
         lineups {
-          apartments: findApartments(matchEquals: true filter: { account: "${ process.env.ACCOUNT }" status: published enabledFeatures: search }) {
+          apartments: findApartments(filter: { account: "${ process.env.ACCOUNT }" status: published enabledFeatures: search }) {
             count
             items {
               ...ApartmentFields

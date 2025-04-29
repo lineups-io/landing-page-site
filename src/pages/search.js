@@ -37,7 +37,6 @@ export const query = graphql`
           banner
       }
       markets: findMarkets(
-        matchEquals: true
         filter: { account: $account }
         sort: [["market", "1"], ["submarket", "1"]]
       ) {
