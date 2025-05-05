@@ -23,7 +23,7 @@ const SearchPage = ({ data, location, navigate }) => {
   )
 
   return <>
-    <Layout trackingData={trackingData} {...data.lineups.site} markets={data.lineups.markets} location={location} navigate={navigate} searchClient={searchClient} />
+    <Layout trackingData={trackingData} {...data.lineups.site} markets={data.lineups.markets} location={location} navigate={navigate} searchClient={searchClient} version={1} />
   </>
 }
 
