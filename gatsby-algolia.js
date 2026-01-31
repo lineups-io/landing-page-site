@@ -5,6 +5,7 @@ const fragments = `
     adLabel
     spotlight
     type
+    housingType
     primaryMarket {
       state {
         name
