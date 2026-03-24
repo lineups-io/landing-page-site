@@ -269,6 +269,7 @@ const queries = [
         'unit.dateAvailableTimestamp',
         'rent',
         'searchable(allMarkets)',
+        'housingType',
       ],
       distinct: 1,
       attributeForDistinct: 'groupBy',
