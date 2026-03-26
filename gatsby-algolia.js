@@ -5,6 +5,7 @@ const fragments = `
     adLabel
     spotlight
     type
+    housingType
     primaryMarket {
       state {
         name
@@ -268,6 +269,7 @@ const queries = [
         'unit.dateAvailableTimestamp',
         'rent',
         'searchable(allMarkets)',
+        'housingType',
       ],
       distinct: 1,
       attributeForDistinct: 'groupBy',
