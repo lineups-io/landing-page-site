@@ -5,7 +5,6 @@ import { useTracking } from 'react-tracking'
 import Helmet  from 'gatsby-theme-atomic-design/src/organisms/Helmet'
 import Layout from 'gatsby-theme-atomic-design/src/templates/QuickView'
 import JsonLd from './JsonLd'
-import Widget from './Widget'
 
 import useLeadManager from '../../hooks/useLeadManager'
 import useLocalStorage from '../../hooks/useLocalStorage'
@@ -45,8 +44,6 @@ const App = ({ data, location, pageContext }) => {
 
   const { trackEvent } = useTracking({}, { dispatchOnMount })
 
-  const [widget] = data.admin.apartment.result.widgets.filter(widget => ['published', 'archived'].indexOf(widget.status) > -1)
-  const bubble = data.admin.apartment.result.widgets.find(widget => widget.status === 'published' && widget.showOnWebsite)
   const {
     scheduleTimes,
     submitContactUs,
@@ -55,7 +52,6 @@ const App = ({ data, location, pageContext }) => {
     source: 'Quick View',
     account: pageContext.account,
     apartment,
-    ...widget,
   })
   const props = {
     galleryUrl: location.pathname.replace(/\/?$/, '') + '/gallery/',
@@ -146,22 +142,12 @@ const App = ({ data, location, pageContext }) => {
   return (
     <>
         <Layout trackingData={trackingData} {...site} apartment={apartment} {...props} />
-        {bubble ? <Widget {...bubble} /> : null}
     </>
   )
 }
 
 export const query = graphql`
-  query getApartmentPage($id: ID! $account: ID! $publicId: String) {
-    admin {
-      apartment(input: { filter: { publicId: { _eq: $publicId } } }) {
-        result {
-          widgets {
-            ...WidgetFields
-          }
-        }
-      }
-    }
+  query getApartmentPage($id: ID! $account: ID!) {
     lineups {
       site: getAccountById(id: $account) {
           ...NavFields
