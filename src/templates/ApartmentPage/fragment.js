@@ -1,34 +1,6 @@
 import { graphql } from 'gatsby'
 
 export const fragments = graphql`
-  fragment WidgetFields on Admin_Widget {
-    _id
-    title
-    status
-    showOnWebsite
-    intro {
-      poster
-      video
-    }
-    guestCard {
-      vendor
-      vendorPropertyId
-      emailTo
-      emailCc
-    }
-    contactUs {
-      vendor
-      vendorPropertyId
-      emailTo
-      emailCc
-    }
-    scheduleTour {
-      vendor
-      vendorPropertyId
-      emailTo
-      emailCc
-    }
-  }
 
   fragment ApartmentFields2 on Lineups_Apartment {
     _id
