@@ -70,18 +70,7 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   const query = `
-    query getWidgets($account: String) {
-      admin {
-        apartments (input: { filter: { status: { _eq: "published" }, account: { _eq: $account } } }) {
-          results {
-            widgets(status: "published") {
-                id: _id
-                title
-            }
-          }
-          totalCount
-        }
-      }
+    query getAccountPages {
       allLineupsApartment {
         nodes {
           lineupsId
@@ -109,6 +98,7 @@ exports.createPages = ({ graphql, actions }) => {
   `
 
   return graphql(query, { account: process.env.ACCOUNT }).then(result => {
+    console.log('result', result.data)
     const apartments = result.data.allLineupsApartment.nodes || []
     const pages = result.data.allLineupsPage.nodes || []
     const markdown = result.data.allMarkdownRemark.nodes || []
@@ -133,25 +123,12 @@ exports.createPages = ({ graphql, actions }) => {
       q3
     )
 
-    const { results = [] } = result.data.admin.apartments
-
     const widgets = []
-    results.forEach(apartment => {
-      (apartment.widgets || []).forEach(widget => widgets.push(widget))
-    })
 
     return widgets.reduce(
       (acc, widget) => acc.then(() => {
-        const path = `/widgets/${ widget.id.toLowerCase() }/`
-        console.log('[site] creating widget page', path, widget.title)
-        return createPage({
-          path,
-          component: require.resolve('./src/templates/WidgetPage/index.js'),
-          context: {
-            id: widget.id,
-            account: process.env.ACCOUNT,
-          },
-        })
+        console.warn('Widgets are not longer supported')
+        return Promise.resolve()
       }),
       q4
     )
