@@ -69,10 +69,6 @@ module.exports = {
           'Link: <https://res.cloudinary.com>; rel=preconnect;',
         ],
         headers: {
-          '/widgets/*': [
-            'X-Frame-Options: SAMEORIGIN',
-            `Content-Security-Policy: frame-ancestors *`,
-          ],
           '/search/': [
             `Link: <https://${ process.env.GATSBY_ALGOLIA_APP_ID }-dsn.algolia.net>; rel=preconnect;`,
           ],
@@ -87,17 +83,6 @@ module.exports = {
         url: process.env.GRAPHQL_API_URI,
         headers: {
           Authorization: `Bearer ${ process.env.GRAPHQL_API_KEY }`,
-        },
-      },
-    },
-    {
-      resolve: 'gatsby-source-graphql',
-      options: {
-        typeName: 'Admin',
-        fieldName: 'admin',
-        url: process.env.ADMIN_GRAPHQL_URI,
-        headers: {
-          Authorization: `Bearer ${ process.env.ADMIN_GRAPHQL_KEY }`,
         },
       },
     },
